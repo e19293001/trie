@@ -1,6 +1,7 @@
 OUT=tst
 MAIN=main
 TEST=testNode
+TEST=testTstNode
 COPTS=-g
 
 all: mkdirs bin/$(TEST)
@@ -14,6 +15,9 @@ comp: obj/tst.o obj/main.o obj/node.o
 
 run:
 	./$(OUT)
+
+obj/TernarySearchTrie.o: TernarySearchTrie.c TernarySearchTrie.h
+	gcc -c $< -o $@ $(COPTS)
 
 obj/tst.o: tst.c tst.h
 	gcc -c $< -o $@ $(COPTS)
@@ -34,9 +38,8 @@ clean:
 obj/$(TEST).o: $(TEST).c
 	gcc -c $< -o $@ $(COPTS)
 
-bin/$(TEST): obj/$(TEST).o obj/node.o obj/unitTestNode.o
+bin/$(TEST): obj/$(TEST).o obj/node.o obj/unitTestNode.o obj/TernarySearchTrie.o
 	gcc $^ -o $@ $(COPTS)
-#	gcc $^ -o $< $(COPTS)
 
 val: mkdirs bin/$(TEST)
 	valgrind --leak-check=full -v ./bin/$(TEST)

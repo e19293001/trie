@@ -8,3 +8,4 @@ void TestRightNode();
 void TestLeftNode();
 void TestMiddleNode();
 void TestWithAllBranchNode();
+void TestTernarySearchTrie();

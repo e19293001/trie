@@ -69,3 +69,7 @@ void TestWithAllBranchNode() {
   _debug_TestWithAllBranchNode printf("[ TestWithAllBranchNode ] finish.\n");
 }
 
+void TestTernarySearchTrie() {
+  printf("TestTernarySearchTrie\n");
+}
+

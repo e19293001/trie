@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <assert.h>
 
-struct node {
+typedef struct node {
   char data;
   struct node* left;
   struct node* middle;
   struct node* right;
-};
+} tstNode;
 
 struct node* newRoot();
 

@@ -7,5 +7,6 @@ int main() {
   TestRightNode();
   TestMiddleNode();
   TestWithAllBranchNode();
+  TestTernarySearchTrie();
   return 0;
 }
