@@ -1,6 +1,8 @@
 #include "TernarySearchTrie.h"
-tstNode* tstInsert(tstNode* p, char *s) {
-  if (p == NULL) {
-    p = (tstNode *) malloc(sizeof(tstNode));
-  }                                     
+tstrie* tstNew(int d) {
+  tstrie* ret;
+
+  ret = (tstrie*) malloc(sizeof(tstrie));
+
+  return ret;
 }
