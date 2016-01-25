@@ -1,6 +1,6 @@
 #include "TernarySearchTrie.h"
 
-int tstSearchR(tstrie *t, char *s, int i);
+tstrie* tstSearchR(tstrie *t, char *s, int i);
 
 tstrie* tstNew(char i, int d) {
   tstrie* ret;
@@ -15,14 +15,34 @@ tstrie* tstNew(char i, int d) {
   return ret;
 }
 
-int tstSearchR(tstrie *t, char *s, int i) {
-  int ret;
+tstrie* tstSearchR(tstrie *t, char *s, int i) {
+  char val = s[i];
 
-  return ret;
+//  printf("val: %c t->item: %c (strlen(s)-1): %0d *s: %s\n", val, t->item, (strlen(s)-1), s);
+
+  if (t == NULL) {
+//    printf("  t is null\n");
+    return NULL;
+  }
+  if (val < t->item) {
+//    printf("  t is less than t->item.\n");
+    return tstSearchR(t->left, s, i);
+  }
+  else if (val > t->item) {
+//    printf("  t is more than t->item.\n");
+    return tstSearchR(t->right, s, i);
+  }
+  else if (i < strlen(s)-1) {
+//    printf("  t is equal to t->item.\n");
+    return tstSearchR(t->middle, s, i+1);
+  }
+  else {
+    return t;
+  }
 }
 
-int tstSearch(tstrie *t, char *s) {
-  int ret;
+tstrie* tstSearch(tstrie *t, char *s) {
+  tstrie *ret;
 
   ret = tstSearchR(t, s, 0);
 

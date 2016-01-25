@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 typedef struct tstrie {
   char item;
@@ -9,4 +11,4 @@ typedef struct tstrie {
 } tstrie;
 
 tstrie* tstNew(char i, int d);
-int tstSearch(tstrie *t, char *s);
+tstrie* tstSearch(tstrie *t, char *s);
