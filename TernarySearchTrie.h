@@ -1,11 +1,13 @@
-#include "stdlib.h"
+#include <stdlib.h>
 
 typedef struct tstrie {
   char item;
   int data;
-  struct tsttrie* left;
-  struct tsttrie* middle;
-  struct tsttrie* right;
+  struct tstrie* left;
+  struct tstrie* middle;
+  struct tstrie* right;
 } tstrie;
 
-tstrie* tstNew(int d);
+tstrie* tstNew(char i, int d);
+int tstSearch(tstrie *t, char *s);
+
