@@ -10,4 +10,3 @@ typedef struct tstrie {
 
 tstrie* tstNew(char i, int d);
 int tstSearch(tstrie *t, char *s);
-
