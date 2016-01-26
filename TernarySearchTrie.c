@@ -1,6 +1,6 @@
 #include "TernarySearchTrie.h"
 
-tstrie* tstSearchR(tstrie *t, char *s, int i);
+tstrie* tstSearchR(tstrie *t, char *s, int i, int cntr);
 
 tstrie* tstNew(char i, int d) {
   tstrie* ret;
@@ -15,36 +15,47 @@ tstrie* tstNew(char i, int d) {
   return ret;
 }
 
-tstrie* tstSearchR(tstrie *t, char *s, int i) {
+tstrie* tstSearchR(tstrie *t, char *s, int i, int cntr) {
   char val = s[i];
+  int x;
 
-//  printf("val: %c t->item: %c (strlen(s)-1): %0d *s: %s\n", val, t->item, (strlen(s)-1), s);
-
+  for (x = 0; x < cntr+1; x++) {
+    printf(" ");
+  }
+//  (t == NULL) ? 
+//    printf("val: %c t is null\n", val) :
+//    printf("val: %c t->item: %c ", val, t->item);
+  
   if (t == NULL) {
-//    printf("  t is null\n");
+    printf("t is null\n");
     return NULL;
   }
   if (val < t->item) {
-//    printf("  t is less than t->item.\n");
-    return tstSearchR(t->left, s, i);
+    printf("[ turning left.");
+    printf(" val: %c t->item: %c\n", val, t->item);
+    return tstSearchR(t->left, s, i, cntr+1);
   }
-  else if (val > t->item) {
-//    printf("  t is more than t->item.\n");
-    return tstSearchR(t->right, s, i);
+  if (val > t->item) {
+    printf("[ turning right.\n");
+    printf(" val: %c t->item: %c\n", val, t->item);
+    return tstSearchR(t->right, s, i, cntr+1);
   }
-  else if (i < strlen(s)-1) {
-//    printf("  t is equal to t->item.\n");
-    return tstSearchR(t->middle, s, i+1);
+  if (i < strlen(s)-1) {
+    printf("[ going to middle.\n");
+    printf(" val: %c t->item: %c\n", val, t->item);
+    return tstSearchR(t->middle, s, i+1, cntr+1);
   }
-  else {
-    return t;
-  }
+
+  printf("\n");
+
+  return t;
 }
 
 tstrie* tstSearch(tstrie *t, char *s) {
   tstrie *ret;
 
-  ret = tstSearchR(t, s, 0);
+  printf("--- [ searching for: %s\n", s);
+  ret = tstSearchR(t, s, 0, 0);
 
   return ret;
 }
