@@ -1,59 +1,71 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #include "TernarySearchTrie.h"
 
 void Test0000();
 tstrie* Test0000MakeTrie();
 void Test0000free(tstrie *t);
-void Test0000search(tstrie *t, char *s);
+int Test0000search(tstrie *t, char *s);
 void Test0000dump(tstrie *t);
 void Test0000dump_(tstrie *t, int cnt);
 tstrie* Test0000MakePattern_00();
+tstrie* Test0000MakePattern_01();
 
 int main() {
   Test0000();
   return 0;
 }
 
-void Test0000() {
-  tstrie *trie;
-//  trie = Test0000MakeTrie();
-//  
-//  Test0000search(trie, "s");
-//  Test0000search(trie, "h");
-//  Test0000search(trie, "t");
-//  Test0000search(trie, "a");
-//  Test0000search(trie, "b");
-//  Test0000dump(trie);
-//
-//  Test0000free(trie);
-
-  trie = Test0000MakePattern_00();
-  Test0000dump(trie);
-
-  Test0000search(trie, "sea");
-  Test0000search(trie, "sea");
-  Test0000search(trie, "seat");
-  Test0000search(trie, "sean");
-
-//  trie->middle->right = tstNew('l', 0);
-//  trie->middle->right->middle = tstNew('l', 0);
-  printf("sell must be present.\n");
-  Test0000search(trie, "sell");
-  Test0000search(trie, "sel");
-  Test0000search(trie, "seat");
-
-  Test0000free(trie);
+char tstItem(tstrie *t) {
+  return (t == NULL) ? (char)NULL : t->item;
 }
 
-void Test0000search(tstrie *t, char *s) {
+void Test0000() {
+  tstrie *trie;
+
+  { // test with pattern 00
+    printf("[ ------------------------------\n");
+    trie = Test0000MakePattern_00();
+
+    assert(Test0000search(trie, "sell") == 1);
+    assert(Test0000search(trie, "sel") == 1);
+    assert(Test0000search(trie, "seat") ==  1);
+    assert(Test0000search(trie, "sean") ==  0);
+
+    //  printf("%c->%c->%c->%c\n", tstItem(trie), tstItem(trie->middle), tstItem(trie->middle->middle->right), tstItem(trie->middle->middle->right->middle));
+
+
+    Test0000free(trie);
+    printf("[ ------------------------------\n");
+  }
+
+  { // test with pattern 01
+    printf("[ ------------------------------\n");
+    trie = Test0000MakePattern_01();
+    assert(Test0000search(trie, "she") == 1);
+    assert(Test0000search(trie, "sells") == 1);
+    assert(Test0000search(trie, "shells") == 1);
+    assert(Test0000search(trie, "shella") == 0);
+    assert(Test0000search(trie, "sea") == 1);
+    assert(Test0000search(trie, "by") == 1);
+    assert(Test0000search(trie, "the") == 1);
+    assert(Test0000search(trie, "shore") == 1);
+    Test0000free(trie);
+    printf("[ ------------------------------\n");
+  }
+}
+
+int Test0000search(tstrie *t, char *s) {
   tstrie *a = tstSearch(t, s);
   if (a != NULL) {
     printf("search found: %s\n", s);
+    return 1;
   }
   else {
     printf("search miss: %s\n", s);
+    return 0;
   }
 }  
 
@@ -73,23 +85,42 @@ tstrie* Test0000MakePattern_00() {
   ret = tstNew('s', 0);
 
   ret->middle = tstNew('e', 0);
-  ret->middle->right = tstNew('l', 0);
-  ret->middle->right->middle = tstNew('l', 0);
   ret->middle->middle = tstNew('a', 0);
   ret->middle->middle->middle = tstNew('t', 0);
+  ret->middle->middle->right = tstNew('l', 0);
+  ret->middle->middle->right->middle = tstNew('l', 0);
 
-  Test0000dump(ret);
+  return ret;
+}
 
-//  ret->left = tstNew('h', 0);
-//  ret->right = tstNew('t', 0);
-//  ret->left->left = tstNew('a', 0);
-//  ret->left->left->middle = tstNew('b', 0);
-//  ret->left->left->middle->middle = tstNew('y', 0);
-//  ret->left->left->left = tstNew('n', 0);
-//  ret->left->left->left->middle = tstNew('t', 0);
-//  ret->left->left->left->left = tstNew('e', 0);
-//  ret->left->left->left->left->middle = tstNew('t', 0);
-                                 
+tstrie* Test0000MakePattern_01() {
+  tstrie *ret;
+  ret = tstNew('s', 0); // she
+
+  ret->middle = tstNew('h', 0);
+  ret->middle->middle = tstNew('e', 0); 
+  ret->middle->middle->middle = tstNew('l', 0); // shells
+  ret->middle->middle->middle->middle = tstNew('l', 0);
+  ret->middle->middle->middle->middle->middle = tstNew('s', 0);
+
+  ret->middle->left = tstNew('e', 0); // sells
+  ret->middle->left->middle = tstNew('l', 0);
+  ret->middle->left->middle->middle = tstNew('l', 0);
+  ret->middle->left->middle->middle->middle = tstNew('s', 0);
+
+  ret->middle->left->middle->left = tstNew('a', 0); // sea
+
+  ret->left = tstNew('b', 0); // by
+  ret->left->middle = tstNew('y', 0); // by
+
+  ret->right = tstNew('t', 0); // the
+  ret->right->middle = tstNew('h', 0);
+  ret->right->middle->middle = tstNew('e', 0);
+
+  ret->middle->middle->right = tstNew('o', 0); // shore
+  ret->middle->middle->right->middle = tstNew('r', 0);
+  ret->middle->middle->right->middle->middle = tstNew('e', 0);
+  
   return ret;
 }
 

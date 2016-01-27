@@ -31,18 +31,18 @@ tstrie* tstSearchR(tstrie *t, char *s, int i, int cntr) {
     return NULL;
   }
   if (val < t->item) {
-    printf("[ turning left.");
-    printf(" val: %c t->item: %c\n", val, t->item);
+    printf("current: val: %c t->item: %c ", val, t->item);
+    printf("[ turning left.\n");
     return tstSearchR(t->left, s, i, cntr+1);
   }
   if (val > t->item) {
+    printf("current: val: %c t->item: %c ", val, t->item);
     printf("[ turning right.\n");
-    printf(" val: %c t->item: %c\n", val, t->item);
     return tstSearchR(t->right, s, i, cntr+1);
   }
   if (i < strlen(s)-1) {
+    printf("current: val: %c t->item: %c ", val, t->item);
     printf("[ going to middle.\n");
-    printf(" val: %c t->item: %c\n", val, t->item);
     return tstSearchR(t->middle, s, i+1, cntr+1);
   }
 
