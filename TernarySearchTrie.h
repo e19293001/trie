@@ -12,3 +12,5 @@ typedef struct tstrie {
 
 tstrie* tstNew(char i, int d);
 tstrie* tstSearch(tstrie *t, char *s);
+void tstCopy(tstrie *src, tstrie **dst);
+void tstDelete(tstrie *t);

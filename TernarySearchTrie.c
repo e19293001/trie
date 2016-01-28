@@ -59,3 +59,27 @@ tstrie* tstSearch(tstrie *t, char *s) {
 
   return ret;
 }
+
+void tstCopy(tstrie *src, tstrie **dst) {
+  (*dst)->item = src->item;
+  (*dst)->data = src->data;
+  (*dst)->left = src->left;
+  (*dst)->middle = src->middle;
+  (*dst)->right = src->right;
+}
+
+void tstDelete(tstrie *t) {
+  if (t != NULL) {
+    if (t->left != NULL) {
+      tstDelete(t->left);
+    }
+    if (t->middle != NULL) {
+      tstDelete(t->middle);
+    }
+    if (t->right != NULL) {
+      tstDelete(t->right);
+    }
+    free(t);
+  }
+}
+

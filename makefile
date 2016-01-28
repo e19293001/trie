@@ -1,6 +1,7 @@
 OUT=tst
 MAIN=main
-TEST=testTsTrie
+#TEST=testTsTrie
+TEST=testQueueTst
 COPTS=-g -Wall
 OBJDIR=obj
 
@@ -17,6 +18,9 @@ run:
 	./$(OUT)
 
 $(OBJDIR)/TernarySearchTrie.o: TernarySearchTrie.c TernarySearchTrie.h
+	gcc -c $< -o $@ $(COPTS)
+
+$(OBJDIR)/QueueTernarySearchTrie.o: QueueTernarySearchTrie.c QueueTernarySearchTrie.h
 	gcc -c $< -o $@ $(COPTS)
 
 #$(OBJDIR)/testTsTrie.o: testTsTrie.c 
@@ -41,7 +45,7 @@ clean:
 $(OBJDIR)/$(TEST).o: $(TEST).c
 	gcc -c $< -o $@ $(COPTS)
 
-bin/$(TEST): $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o
+bin/$(TEST): $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o
 	gcc $^ -o $@ $(COPTS)
 
 val: mkdirs bin/$(TEST)
