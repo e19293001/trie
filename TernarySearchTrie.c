@@ -66,6 +66,7 @@ void tstCopy(tstrie *src, tstrie **dst) {
   (*dst)->left = src->left;
   (*dst)->middle = src->middle;
   (*dst)->right = src->right;
+//  printf("[ tstCopy ] src->item: %c src->data: %0d (*dst)->item: %c (*dst)->data: %0d\n", src->item, src->data, (*dst)->item, (*dst)->data);
 }
 
 void tstDelete(tstrie *t) {
@@ -83,3 +84,51 @@ void tstDelete(tstrie *t) {
   }
 }
 
+void printspace(int cnt) {
+  int x;
+  for (x = 0; x < cnt+1; x++) {
+    printf(" ");
+  }
+}
+
+
+void tstDump(tstrie *t) {
+  printf("[\n");
+  tstDump_(t, 0);
+  printf("]");
+  printf("\n");
+}
+
+void tstDump_(tstrie *t, int cnt) {
+  if (t == NULL) {
+    printf("null here.");
+  }
+  else {
+    printspace(cnt);
+    printf("->%c\n", t->item);
+    printspace(cnt);
+    if (t->left != NULL) {
+      printf(" turning left\n");
+      tstDump_(t->left, cnt+1);
+    }
+    else {
+      printf(" left is null.\n");
+    }
+    printspace(cnt);
+    if (t->middle != NULL) {
+      printf(" go to middle\n");
+      tstDump_(t->middle, cnt+1);
+    }
+    else {
+      printf(" middle is null.\n");
+    }
+    printspace(cnt);
+    if (t->right != NULL) {
+      printf(" turning right\n");
+      tstDump_(t->right, cnt+1);
+    }
+    else {
+      printf(" right is null.\n");
+    }
+  }
+}  

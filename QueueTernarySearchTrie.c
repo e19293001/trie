@@ -13,9 +13,13 @@ tstqueue* tstqNew(char key, int value) {
 }
 
 int tstqSize(tstqueue *q) {
-  int ret;
-
-  return ret;
+  if (q == NULL) {
+    return 0;
+  }
+  else {
+    return 1 + tstqSize(q->next);
+  }
+  //return (*q == NULL) ? 0 : 1 + tstqSize((*q)->next);
 }
 
 void tstqDelete(tstqueue *q) {
@@ -29,14 +33,73 @@ void tstqDelete(tstqueue *q) {
   }
 }
 
-tstqueue* tstqPopfront(tstqueue *q) {
+tstqueue* tstqPopfront(tstqueue **q) {
   tstqueue* ret;
+  ret = *q;
+  (*q) = (*q)->next;
+  ret->next = NULL;
+  return ret;
+}
+
+tstqueue* tstqPopback(tstqueue **q) {
+  tstqueue* ret;
+  tstqueue* tail;
+  tstqueue* prevtail;
+  tstqueue* prev1tail;
+
+  ret = NULL;
+  printf("[ tstqPopback ] (*q)->item->item: %c (*q)->item->data: %0d\n", (*q)->item->item, (*q)->item->data);
+  if (*q != NULL) {
+    if ((*q)->next != NULL) {
+      tail = *q;
+      printf("[ tstqPopback ] tail->item->item: %c tail->item->data: %0d\n", tail->item->item, tail->item->data);
+      prevtail = NULL;
+      //    while (tail != NULL && tail->next != NULL) {
+      while (tail != NULL) {
+        prev1tail = prevtail;
+        prevtail = tail;
+        tail = tail->next;
+      }
+      if (prev1tail != NULL) {
+        prev1tail->next = NULL;
+      }
+      ret = prevtail;
+    }
+    else {
+      ret = *q;
+      *q = NULL;
+    }
+  }
+  else {
+    printf("[ tstqPopback ] *q is empty\n");
+  }
+
+  printf("[ tstqPopback ] ret->item->item: %c ret->item->data: %0d\n", ret->item->item, ret->item->data);
 
   return ret;
 }
 
-tstqueue* tstqPopback(tstqueue *q) {
+tstqueue* tstqPushback(tstqueue *q, tstrie *t) {
   tstqueue* ret;
+  tstqueue* tail;
+  tstqueue* prevtail;
+
+  ret = tstqNew((char)NULL, 0);
+  tstCopy(t, &ret->item);
+
+  tail = q;
+  prevtail = NULL;
+  while (tail != NULL) {
+    prevtail = tail;
+    tail = tail->next;
+  }
+  tail = prevtail;
+  tail->next = ret;
+  ret = q;
+
+  printf("[ tstqPushback start ]\n");
+  tstqDump(ret);
+  printf("[ tstqPushback end ]\n");
 
   return ret;
 }
@@ -45,10 +108,8 @@ tstqueue* tstqPushfront(tstqueue *q, tstrie *t) {
   tstqueue* ret;
   ret = tstqNew((char)NULL, 0);
   tstCopy(t,&ret->item);
-  printf("[ tstqPushfront ] ret->item->item: %c ret->item->data: %0d\n", ret->item->item, ret->item->data);
-  printf("[ tstqPushfront ] t->item: %c t->data: %0d\n", t->item, t->data);
+
   ret->next = q;
-  printf("[ tstqPushfront ] ret->next->item->item: %c ret->next->item->data: %0d\n", ret->next->item->item, ret->next->item->data);
 
   return ret;
 }
@@ -56,19 +117,16 @@ tstqueue* tstqPushfront(tstqueue *q, tstrie *t) {
 void tstqDump(tstqueue *q) {
   printf("[ tstqDump ] ");
   if (q != NULL) {
-    printf("%c", q->item->item);
+    printf("[%c:%0d]", q->item->item, q->item->data);
     q = q->next;
   }
+  else {
+    printf("[ tstqDump ] *q is empty.\n");
+  }
   while (q != NULL) {
-    printf("->%c", q->item->item);
+    printf("->[%c:%0d]", q->item->item, q->item->data);
     q = q->next;
   }
   printf("\n");
-}
-
-tstqueue* tstqPushback(tstqueue *q, tstrie *t) {
-  tstqueue* ret;
-
-  return ret;
 }
 

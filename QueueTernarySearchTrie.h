@@ -13,9 +13,9 @@ int tstqSize(tstqueue *q);
 
 void tstqDelete(tstqueue *q);
 
-tstqueue* tstqPopfront(tstqueue *q);
+tstqueue* tstqPopfront(tstqueue **q);
 
-tstqueue* tstqPopback(tstqueue *q);
+tstqueue* tstqPopback(tstqueue **q);
 
 tstqueue* tstqPushfront(tstqueue *q, tstrie *t);
 
