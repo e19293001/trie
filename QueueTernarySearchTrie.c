@@ -84,7 +84,7 @@ tstqueue* tstqPushback(tstqueue *q, tstrie *t) {
   tstqueue* tail;
   tstqueue* prevtail;
 
-  ret = tstqNew((char)NULL, 0);
+  ret = tstqNew('\0', 0);
   tstCopy(t, &ret->item);
 
   tail = q;
@@ -106,7 +106,7 @@ tstqueue* tstqPushback(tstqueue *q, tstrie *t) {
 
 tstqueue* tstqPushfront(tstqueue *q, tstrie *t) {
   tstqueue* ret;
-  ret = tstqNew((char)NULL, 0);
+  ret = tstqNew('\0', 0);
   tstCopy(t,&ret->item);
 
   ret->next = q;
