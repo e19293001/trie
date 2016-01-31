@@ -1,16 +1,19 @@
 #include "TernarySearchTrie.h"
+#include "QueueTernarySearchTrie.h"
 
 tstrie* tstSearchR(tstrie *t, char *s, int i, int cntr);
 
 tstrie* tstNew(char i, int d) {
   tstrie* ret;
 
+//  printf("[ tstNew ] creating...\n");
   ret = (tstrie *) malloc(sizeof(tstrie));
   ret->item = i;
   ret->data = d;
   ret->left = NULL;
   ret->middle = NULL;
   ret->right = NULL;
+//  printf("[ tstNew ] done.\n");
 
   return ret;
 }
@@ -61,15 +64,34 @@ tstrie* tstSearch(tstrie *t, char *s) {
 }
 
 void tstCopy(tstrie *src, tstrie **dst) {
-  (*dst)->item = src->item;
-  (*dst)->data = src->data;
-  (*dst)->left = src->left;
-  (*dst)->middle = src->middle;
-  (*dst)->right = src->right;
+//  tstDump(src);
+  (*dst) = tstNew(src->item, src->data);
+  //(*dst)->item = src->item;
+  //(*dst)->data = src->data;
+  //(*dst)->left = src->left;
+  //(*dst)->middle = src->middle;
+  //(*dst)->right = src->right;
+
+//  printf("[ tstCopy ] now trying to branch...\n");
+  if (src->left != NULL) {
+//    printf("[ tstCopy ] going left\n");
+    tstCopy(src->left,&((*dst)->left));
+  }
+  if (src->middle != NULL) {
+//    printf("[ tstCopy ] going middle\n");
+    tstCopy(src->middle,&((*dst)->middle));
+  }
+  if (src->right != NULL) {
+//    printf("[ tstCopy ] going right\n");
+    tstCopy(src->right,&((*dst)->right));
+  }
+//  tstDump(*dst);
+//  printf("[ tstCopy ] done.\n");
 //  printf("[ tstCopy ] src->item: %c src->data: %0d (*dst)->item: %c (*dst)->data: %0d\n", src->item, src->data, (*dst)->item, (*dst)->data);
 }
 
 void tstDelete(tstrie *t) {
+//  printf("[ tstDelete ]\n");
   if (t != NULL) {
     if (t->left != NULL) {
       tstDelete(t->left);
@@ -133,25 +155,23 @@ void tstDump_(tstrie *t, int cnt) {
   }
 }  
 
-// id == 0 -> right
-// id == 1 -> middle
-// id == 2 -> left
-void tstDumpGraphical_(tstrie *t, int id, int level) {
+void tstDumpGraphical_(tstrie *t, int branch, int level) {
   int i = 0;
   if (t == NULL) {
     return;
   }
   else {
-    for (i = 0; i < level; i++) {
-      printf("|    ");
-    }
-    printf("`--- %c\n", t->item);
-    tstDumpGraphical_(t->right, 0, level+1);
-    tstDumpGraphical_(t->middle, 1, level+1);
-    tstDumpGraphical_(t->left, 2, level+1);
+    tstqueue *stack = NULL;
+    stack = tstqPushfront(stack, t);
+    printf("stck.size(): %0d\n", tstqSize(stack));
+    tstqDump(stack);
+    //tstDumpGraphical_(t->right, 0, level+1);
+    //tstDumpGraphical_(t->middle, 1, level+1);
+    //tstDumpGraphical_(t->left, 0, level+1);
+    tstqDelete(stack);
   }
 }
 
 void tstDumpGraphical(tstrie *t) {
-  tstDumpGraphical_(t, 1, 0);
+  tstDumpGraphical_(t, 0, 0);
 }
