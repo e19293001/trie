@@ -1,22 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-
-#include "TernarySearchTrie.h"
-
-void Test0000();
-void Test0001();
-tstrie* Test0000MakeTrie();
-void Test0000free(tstrie *t);
-int Test0000search(tstrie *t, char *s);
-void Test0000dump(tstrie *t);
-void Test0000dump_(tstrie *t, int cnt);
-tstrie* Test0000MakePattern_00();
-tstrie* Test0000MakePattern_01();
+#include "testTsTrie.h"
 
 int main() {
 //  Test0000();
-  Test0001();
+//  Test0001();
+  Test0002();
   return 0;
 }
 
@@ -199,4 +186,32 @@ void Test0001() {
   tst = Test0000MakePattern_01();
   tstDumpGraphical(tst);
   tstDelete(tst);  
+}
+
+void Test0002() {
+  tstrie *trie;
+  tstrie *copied;
+
+  { // test with pattern 00
+    printf("[ ------------------------------\n");
+    trie = Test0000MakePattern_00();
+    printf("dumping trie:\n");
+    tstDump(trie);
+    tstCopy(trie, &copied);
+    printf("dumping copied:\n");
+    tstDump(copied);
+    tstDelete(trie);
+    tstDelete(copied);
+    printf("[ ------------------------------\n");
+    printf("[ ------------------------------\n");
+    trie = Test0000MakePattern_01();
+    printf("dumping trie:\n");
+    tstDump(trie);
+    tstCopy(trie, &copied);
+    printf("dumping copied:\n");
+    tstDump(copied);
+    tstDelete(trie);
+    tstDelete(copied);
+    printf("[ ------------------------------\n");
+  }
 }
