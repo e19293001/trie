@@ -1,3 +1,6 @@
+#ifndef TernarySearchTrie_h
+#define TernarySearchTrie_h
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -17,4 +20,6 @@ void tstDelete(tstrie *t);
 void tstDump_(tstrie *t, int cnt);
 void tstDump(tstrie *t);
 void tstDumpGraphical(tstrie *t);
-void tstDumpGraphical_(tstrie *t, int id, int level);
+void tstDumpGraphical_(tstrie *t, int branch, int level);
+
+#endif
