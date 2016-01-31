@@ -5,6 +5,7 @@
 #include "TernarySearchTrie.h"
 
 void Test0000();
+void Test0001();
 tstrie* Test0000MakeTrie();
 void Test0000free(tstrie *t);
 int Test0000search(tstrie *t, char *s);
@@ -14,12 +15,13 @@ tstrie* Test0000MakePattern_00();
 tstrie* Test0000MakePattern_01();
 
 int main() {
-  Test0000();
+//  Test0000();
+  Test0001();
   return 0;
 }
 
 char tstItem(tstrie *t) {
-  return (t == NULL) ? (char)NULL : t->item;
+  return (t == NULL) ? '\0' : t->item;
 }
 
 void Test0000() {
@@ -146,7 +148,7 @@ void Test0000dump(tstrie *t) {
   printf("\n");
 }
 
-void printspace(int cnt) {
+void printspce(int cnt) {
   int x;
   for (x = 0; x < cnt+1; x++) {
     printf(" ");
@@ -158,9 +160,9 @@ void Test0000dump_(tstrie *t, int cnt) {
     printf("null here.");
   }
   else {
-    printspace(cnt);
+    printspce(cnt);
     printf("->%c\n", t->item);
-    printspace(cnt);
+    printspce(cnt);
     if (t->left != NULL) {
       printf(" turning left\n");
       Test0000dump_(t->left, cnt+1);
@@ -168,7 +170,7 @@ void Test0000dump_(tstrie *t, int cnt) {
     else {
       printf(" left is null.\n");
     }
-    printspace(cnt);
+    printspce(cnt);
     if (t->middle != NULL) {
       printf(" go to middle\n");
       Test0000dump_(t->middle, cnt+1);
@@ -176,7 +178,7 @@ void Test0000dump_(tstrie *t, int cnt) {
     else {
       printf(" middle is null.\n");
     }
-    printspace(cnt);
+    printspce(cnt);
     if (t->right != NULL) {
       printf(" turning right\n");
       Test0000dump_(t->right, cnt+1);
@@ -186,3 +188,15 @@ void Test0000dump_(tstrie *t, int cnt) {
     }
   }
 }  
+
+void Test0001() {
+  tstrie* tst;
+//  tst = tstNew('s', 0);
+//  tst->right = tstNew('a', 1);
+//  tst->middle = tstNew('b', 1);
+//  tst->left = tstNew('c', 1);
+//tstDump(tst);
+  tst = Test0000MakePattern_01();
+  tstDumpGraphical(tst);
+  tstDelete(tst);  
+}

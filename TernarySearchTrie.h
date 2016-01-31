@@ -16,4 +16,5 @@ void tstCopy(tstrie *src, tstrie **dst);
 void tstDelete(tstrie *t);
 void tstDump_(tstrie *t, int cnt);
 void tstDump(tstrie *t);
-
+void tstDumpGraphical(tstrie *t);
+void tstDumpGraphical_(tstrie *t, int id, int level);

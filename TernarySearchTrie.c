@@ -132,3 +132,26 @@ void tstDump_(tstrie *t, int cnt) {
     }
   }
 }  
+
+// id == 0 -> right
+// id == 1 -> middle
+// id == 2 -> left
+void tstDumpGraphical_(tstrie *t, int id, int level) {
+  int i = 0;
+  if (t == NULL) {
+    return;
+  }
+  else {
+    for (i = 0; i < level; i++) {
+      printf("|    ");
+    }
+    printf("`--- %c\n", t->item);
+    tstDumpGraphical_(t->right, 0, level+1);
+    tstDumpGraphical_(t->middle, 1, level+1);
+    tstDumpGraphical_(t->left, 2, level+1);
+  }
+}
+
+void tstDumpGraphical(tstrie *t) {
+  tstDumpGraphical_(t, 1, 0);
+}
