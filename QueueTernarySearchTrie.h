@@ -1,3 +1,6 @@
+#ifndef QueueTernarySearchTrie_h
+#define QueueTernarySearchTrie_h
+
 #include "TernarySearchTrie.h"
 
 typedef struct tstqueue {
@@ -22,3 +25,4 @@ tstqueue* tstqPushfront(tstqueue *q, tstrie *t);
 tstqueue* tstqPushback(tstqueue *q, tstrie *t);
 
 void tstqDump(tstqueue *q);
+#endif
