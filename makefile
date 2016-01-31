@@ -1,7 +1,7 @@
 OUT=tst
 MAIN=main
-#TEST=testTsTrie
-TEST=testQueueTst
+TEST=testTsTrie
+#TEST=testQueueTst
 COPTS=-g -Wall
 OBJDIR=obj
 

@@ -155,22 +155,74 @@ void tstDump_(tstrie *t, int cnt) {
   }
 }  
 
+/*
+[s-0-0]
+|---[t-1-1]
+|   `---[h-2-2]
+|       `---[e-3-3]
+|---[h-1-1]
+|   |---[e-2-2]
+|   |   |---[o-3-3]
+|   |   |   `---[r-4-4]
+|   |   |       `---[e-5-5]
+|   |   `---[l-3-3]
+|   |       |---[l-4-4]
+|   |           `---[s-5-5]
+|   `---[e-2-2]
+|       `---[l-3-3]
+|           |---[l-4-4]
+|           |   `---[s-5-5]
+|           `---[a-4-4]
+`---[b-1-1]
+    `---[y-2-2]
+*/
+
 void tstDumpGraphical_(tstrie *t, int branch, int level) {
-  int i = 0;
+  int ib = 0;
+  int il = 0;
   if (t == NULL) {
     return;
   }
   else {
-    tstqueue *stack = NULL;
-    stack = tstqPushfront(stack, t);
-    printf("stck.size(): %0d\n", tstqSize(stack));
-    tstqDump(stack);
-    //tstDumpGraphical_(t->right, 0, level+1);
-    //tstDumpGraphical_(t->middle, 1, level+1);
-    //tstDumpGraphical_(t->left, 0, level+1);
-    tstqDelete(stack);
+    for (il = 0; il < level; il++) {
+      printf("|---");
+    }
+
+    printf("[%c-%0d-%0d]\n", t->item, branch, level);
+    tstDumpGraphical_(t->right, branch+1, level+1);
+    tstDumpGraphical_(t->middle, branch+1, level+1);
+    tstDumpGraphical_(t->left, branch+1, level+1);
   }
 }
+
+//void tstDumpGraphical_(tstrie *t, int branch, int level) {
+//  tstqueue *stack = NULL;
+//  stack = tstqPushfront(stack, t);
+//  printf("size of stack: %0d\n", tstqSize(stack));
+//
+//  while (tstqSize(stack) != 0) {
+//    tstrie *trie;
+//    tstqueue *hold;
+//    int i;
+//    //tstqDump(stack);
+//    for (i = 0; i < tstqSize(stack); i++) {
+//      printf("|---");
+//    }
+//    hold = tstqPopfront(&stack);
+//    printf("[%c-%0d]\n", hold->item->item, tstqSize(stack));
+//    if (hold->item->left != NULL) {
+//      stack = tstqPushfront(stack, hold->item->left);
+//    }
+//    if (hold->item->middle != NULL) {
+//      stack = tstqPushfront(stack, hold->item->middle);
+//    }
+//    if (hold->item->right != NULL) {
+//      stack = tstqPushfront(stack, hold->item->right);
+//    }
+//    tstqDelete(hold);
+//  }
+//}
+
 
 void tstDumpGraphical(tstrie *t) {
   tstDumpGraphical_(t, 0, 0);

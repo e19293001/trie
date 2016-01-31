@@ -34,10 +34,31 @@ void tstqDelete(tstqueue *q) {
 }
 
 tstqueue* tstqPopfront(tstqueue **q) {
-  tstqueue* ret;
-  ret = *q;
-  (*q) = (*q)->next;
-  ret->next = NULL;
+  tstqueue* ret = NULL;
+//  printf("popping\n");
+  if (*q == NULL) {
+//    printf("*q is null\n");
+    return NULL;
+  }
+  else  {
+//    printf("*q is NOT null\n");
+    ret = *q;
+    if ((*q)->next == NULL) {
+//      printf("(*q)->next is NULL\n");
+      (*q) = NULL;
+    }
+    else {
+//      printf("(*q)->next is NOT NULL\n");
+      (*q) = (*q)->next;
+//      tstqDump(*q);
+      ret->next = NULL;
+    }
+//    printf("dumping start\n");
+//    tstqDump(ret);
+//    printf("dumping end\n");
+  }
+
+
   return ret;
 }
 
@@ -96,11 +117,11 @@ tstqueue* tstqPushback(tstqueue *q, tstrie *t) {
 //    tstqDump(ret);
   }
   else {
-    printf("[ tstqPushfront ] q is NULL\n");
+//    printf("[ tstqPushfront ] q is NULL\n");
     //ret->item = NULL;
     tstCopy(t,&ret->item);
     ret->next = NULL;
-    printf("[ tstqPushfront ] done copying\n");
+//    printf("[ tstqPushfront ] done copying\n");
   }
 
   return ret;
@@ -108,7 +129,7 @@ tstqueue* tstqPushback(tstqueue *q, tstrie *t) {
 
 tstqueue* tstqPushfront(tstqueue *q, tstrie *t) {
   tstqueue* ret = NULL;
-  printf("[ tstqPushfront ] \n");
+//  printf("[ tstqPushfront ] \n");
   ret = malloc(sizeof(tstqueue));
   
   if (q != NULL) {
@@ -117,11 +138,11 @@ tstqueue* tstqPushfront(tstqueue *q, tstrie *t) {
     ret->next = q;
   }
   else {
-    printf("[ tstqPushfront ] q is NULL\n");
+//    printf("[ tstqPushfront ] q is NULL\n");
     //ret->item = NULL;
     tstCopy(t,&ret->item);
     ret->next = NULL;
-    printf("[ tstqPushfront ] done copying\n");
+//    printf("[ tstqPushfront ] done copying\n");
   }
   return ret;
 }
