@@ -1,7 +1,7 @@
 OUT=tst
 MAIN=main
-TEST=testTsTrie
-#TEST=testQueueTst
+#TEST=testTsTrie
+TEST=testQueueTst
 COPTS=-g -Wall
 OBJDIR=obj
 
@@ -49,4 +49,4 @@ bin/$(TEST): $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTe
 	gcc $^ -o $@ $(COPTS)
 
 val: mkdirs bin/$(TEST)
-	valgrind --leak-check=full -v ./bin/$(TEST)
+	valgrind --leak-check=full --leak-check=full --show-reachable=yes --track-origins=yes -v ./bin/$(TEST)
