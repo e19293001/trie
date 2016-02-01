@@ -3,11 +3,18 @@
 
 tstrie* tstSearchR(tstrie *t, char *s, int i, int cntr);
 
+void printspace(int cnt) {
+  int x;
+  for (x = 0; x < cnt+1; x++) {
+    printf(" ");
+  }
+}
+
 tstrie* tstNew(char i, int d) {
   tstrie* ret;
 
 //  printf("[ tstNew ] creating...\n");
-  ret = (tstrie *) malloc(sizeof(tstrie));
+  ret = malloc(sizeof(tstrie));
   ret->item = i;
   ret->data = d;
   ret->left = NULL;
@@ -49,7 +56,7 @@ tstrie* tstSearchR(tstrie *t, char *s, int i, int cntr) {
     return tstSearchR(t->middle, s, i+1, cntr+1);
   }
 
-  printf("\n");
+  printf("returning... current: val: %c t->item: %c\n", val, t->item);
 
   return t;
 }
@@ -59,6 +66,52 @@ tstrie* tstSearch(tstrie *t, char *s) {
 
   printf("--- [ searching for: %s\n", s);
   ret = tstSearchR(t, s, 0, 0);
+
+  return ret;
+}
+
+tstrie* tstInsertR(tstrie *t, char *s, int val, int i, int cntr) {
+  char charindxd = s[i];
+//  tstrie *ret = t;
+  printspace(cntr);
+  printf("[ tstInsert ] s: %s val: %0d i: %0d cntr: %0d\n", s, val, i, cntr);
+  //printf("++++++++++++++++++++++++++++++++++++++\n");
+  if (t == NULL) {
+//    printf("t is NULL ");
+//    printf("inserting: %c\n", charindxd);
+    t = tstNew(charindxd, 888);
+    //tstDump(t);
+  }
+  if (charindxd < t->item) {
+//    printf("[ turning left.\n");
+    //printf("current: val: %c t->item: %c\n", val, t->item);
+    t->left =  tstInsertR(t->left, s, val, i, cntr+1);
+  }
+  else if (charindxd > t->item) {
+//    printf("[ turning right.\n");
+    //printf("current: val: %c t->item: %c\n", val, t->item);
+    t->right = tstInsertR(t->right, s, val, i, cntr+1);
+  }
+  else if (i < strlen(s)-1) {
+//    printf("[ going to middle.\n");
+    //printf("current: val: %c t->item: %c\n", val, t->item);
+    t->middle = tstInsertR(t->middle, s, val, i+1, cntr+1);
+  }
+  else {
+    printf("[ assigning value: %d\n", val);
+    t->data = val;
+  }
+//  printf("returning %c\n", ret->item);
+  return t;
+}
+
+tstrie* tstInsert(tstrie *t, char *s, int val) {
+  tstrie *ret;
+
+  printf("++++++++++++++++++++++++++++++++++++++ start\n");
+  printf("inserting [%s]\n", s);
+  ret = tstInsertR(t, s, val, 0, 0);
+  printf("++++++++++++++++++++++++++++++++++++++ end\n");
 
   return ret;
 }
@@ -106,13 +159,6 @@ void tstDelete(tstrie *t) {
   }
 }
 
-void printspace(int cnt) {
-  int x;
-  for (x = 0; x < cnt+1; x++) {
-    printf(" ");
-  }
-}
-
 
 void tstDump(tstrie *t) {
   printf("[\n");
@@ -123,11 +169,11 @@ void tstDump(tstrie *t) {
 
 void tstDump_(tstrie *t, int cnt) {
   if (t == NULL) {
-    printf("null here.");
+    printf("null here.\n");
   }
   else {
     printspace(cnt);
-    printf("->%c\n", t->item);
+    printf("->%c--%0d\n", t->item, t->data);
     printspace(cnt);
     if (t->left != NULL) {
       printf(" turning left\n");
@@ -178,7 +224,7 @@ void tstDump_(tstrie *t, int cnt) {
 */
 
 void tstDumpGraphical_(tstrie *t, int branch, int level) {
-  int ib = 0;
+//  int ib = 0;
   int il = 0;
   if (t == NULL) {
     return;
