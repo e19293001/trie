@@ -1,17 +1,57 @@
 #include "testTsTrie.h"
 
-int main() {
-//  Test0000();
-  Test0001();
-//  Test0002();
-  return 0;
+void Test0003() { // test insert
+  tstrie *trie = NULL;
+  tstrie *hold;
+  int data;
+
+  trie = tstInsert(trie, "s", -1);
+  tstDumpGraphical(trie);
+  hold = tstSearch(trie, "s");
+  printf("data: %0d\n", hold->data);
+  assert(hold->data == -1);
+
+  printf("[ Test0003 ] start\n");
+  trie = tstInsert(trie, "the", 1);
+  trie = tstInsert(trie, "quick", 2);
+  trie = tstInsert(trie, "brown", 3);
+  trie = tstInsert(trie, "fox", 4);
+
+  trie = tstInsert(trie, "jumps", 5);
+
+  trie = tstInsert(trie, "over", 6);
+  trie = tstInsert(trie, "the", 7);
+  trie = tstInsert(trie, "lazy", 8);
+  trie = tstInsert(trie, "dog", 9);
+  trie = tstInsert(trie, "doggie", 9);
+  trie = tstInsert(trie, "dogkie", 9);
+  trie = tstInsert(trie, "dogkieng", 9);
+  trie = tstInsert(trie, "tralala", 9);
+
+  hold = tstSearch(trie, "quick");
+  printf("->data: %d\n", hold->data);
+
+  hold = tstSearch(trie, "jumps");
+  printf("->data: %d\n", hold->data);
+  assert(tstSearch(trie, "quick")->data == 2);
+  assert(tstSearch(trie, "brown")->data == 3);
+  assert(tstSearch(trie, "fox")->data == 4);
+  assert(tstSearch(trie, "jumps")->data == 5);
+  assert(tstSearch(trie, "over")->data == 6);
+  assert(tstSearch(trie, "the")->data == 7);
+  assert(tstSearch(trie, "lazy")->data == 8);
+  assert(tstSearch(trie, "dog")->data == 9);
+  tstDumpGraphical(trie);
+
+  tstDelete(trie);
+  printf("[ Test0003 ] end\n");
 }
 
 char tstItem(tstrie *t) {
   return (t == NULL) ? '\0' : t->item;
 }
 
-void Test0000() {
+void Test0000() { // test search
   tstrie *trie;
 
   { // test with pattern 00
