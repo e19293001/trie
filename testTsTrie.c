@@ -3,7 +3,6 @@
 void Test0003() { // test insert
   tstrie *trie = NULL;
   tstrie *hold;
-  int data;
 
   trie = tstInsert(trie, "s", -1);
   tstDumpGraphical(trie);
