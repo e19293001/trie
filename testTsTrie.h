@@ -8,9 +8,10 @@
 #include "TernarySearchTrie.h"
 #include "TernarySearchTrie.h"
 
-void Test0000();
+void Test0000(); // test search
 void Test0001();
 void Test0002(); // test copy
+void Test0003(); // test insert
 tstrie* Test0000MakeTrie();
 void Test0000free(tstrie *t);
 int Test0000search(tstrie *t, char *s);
