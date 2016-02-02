@@ -2,6 +2,98 @@
 #+COLUMNS: %52ITEM(Task) %15SCHEDULED(Planned End Data) %19CLOSED(Actual End Date) %15Progress(Progress){X} %15Effort(Estimated Effort){:} %7CLOCKSUM(Actual Effort){:}
 
 * Ternary Search Trie
+** Documentation of Ternary Search Trie
+*** Structures
+This section introduces the structures to be used for the Ternary Search Trie
+
+**** tstNode
+
+#+BEGIN_SRC c
+  typedef struct tstNode {
+    char item;
+    int data;
+    tstNode* left;
+    tstNode* middle;
+    tstNode* right;
+  } tstrie;
+#+END_SRC
+
+*** Functions
+This section defines the functions that can be used to manipulate the
+ternary search trie.
+
+**** tstNew
+#+BEGIN_SRC c
+  tstrie* tstNew(char i, int d);
+#+END_SRC
+
+Creates and initialize a tstrie. The initial value for data is assign
+to =d=. =i= is assigned to item. =middle=, =left= and =right= are
+initialized to NULL;
+
+This function returns a pointer to the newly created node of a trie.
+
+**** tstSearch
+#+BEGIN_SRC c
+  int tstSearch(tstrie *t, char *s);
+#+END_SRC
+
+Search string =s= in the tstrie pointed by =t=.
+
+This function returns the value of data. A value of -1 will be
+returned when =s= is not found.
+
+**** tstInsert
+#+BEGIN_SRC c
+  int tstInsert(char *s, int d);
+#+END_SRC
+
+Insert =s= into the trie by doing search first until it reaches the
+last character or a null link. If a null link and the last character
+is encountered, a new node will be created and set the data to the
+value of d. If a null link and the last character is not yet is
+encountered, we set the data to that node to the value of d.
+
+This function returns -1 to indicate failure.
+
+**** tstFree
+#+BEGIN_SRC c
+  void tstFree(tstrie root);
+#+END_SRC
+
+Free all the memory allocations for all the nodes of the trie
+including the =root=.
+
+**** tstSize
+*** Testing
+**** Test000
+Hard coded tstrie to test =tstInsert()=
+
+Input string:
+{
+   {she,0}, 
+   {sells,1}, 
+   {sea,2}, 
+   {shells,3}, 
+   {by,4}, 
+   {the,5}, 
+   {sea,6}, 
+   {shore,7}, 
+   {ant,8}, 
+   {art,9}, 
+   {zea,10}
+}
+
+**** Test001
+Test =tstInsert()= by inserting keys and values. Verify the inserted
+strings by searching the keys through =tstInsert()=.
+
+**** Test002
+
+** Documentation of Queue for Ternary Search Trie
+*** Structures
+*** Function
+*** Testing
 ** Tasks
    :LOGBOOK:
    CLOCK: [2016-01-22 Fri 20:36]--[2016-01-22 Fri 20:37] =>  0:01
@@ -134,95 +226,3 @@ need to implement breadth first search.
 *** TODO testing
 
 *** TODO create a documentation for Ternary Search Trie
-* Documentation of Ternary Search Trie
-** Structures
-This section introduces the structures to be used for the Ternary Search Trie
-
-*** tstNode
-
-#+BEGIN_SRC c
-  typedef struct tstNode {
-    char item;
-    int data;
-    tstNode* left;
-    tstNode* middle;
-    tstNode* right;
-  } tstrie;
-#+END_SRC
-
-** Functions
-This section defines the functions that can be used to manipulate the
-ternary search trie.
-
-*** tstNew
-#+BEGIN_SRC c
-  tstrie* tstNew(char i, int d);
-#+END_SRC
-
-Creates and initialize a tstrie. The initial value for data is assign
-to =d=. =i= is assigned to item. =middle=, =left= and =right= are
-initialized to NULL;
-
-This function returns a pointer to the newly created node of a trie.
-
-*** tstSearch
-#+BEGIN_SRC c
-  int tstSearch(tstrie *t, char *s);
-#+END_SRC
-
-Search string =s= in the tstrie pointed by =t=.
-
-This function returns the value of data. A value of -1 will be
-returned when =s= is not found.
-
-*** tstInsert
-#+BEGIN_SRC c
-  int tstInsert(char *s, int d);
-#+END_SRC
-
-Insert =s= into the trie by doing search first until it reaches the
-last character or a null link. If a null link and the last character
-is encountered, a new node will be created and set the data to the
-value of d. If a null link and the last character is not yet is
-encountered, we set the data to that node to the value of d.
-
-This function returns -1 to indicate failure.
-
-*** tstFree
-#+BEGIN_SRC c
-  void tstFree(tstrie root);
-#+END_SRC
-
-Free all the memory allocations for all the nodes of the trie
-including the =root=.
-
-*** tstSize
-** Testing
-*** Test000
-Hard coded tstrie to test =tstInsert()=
-
-Input string:
-{
-   {she,0}, 
-   {sells,1}, 
-   {sea,2}, 
-   {shells,3}, 
-   {by,4}, 
-   {the,5}, 
-   {sea,6}, 
-   {shore,7}, 
-   {ant,8}, 
-   {art,9}, 
-   {zea,10}
-}
-
-*** Test001
-Test =tstInsert()= by inserting keys and values. Verify the inserted
-strings by searching the keys through =tstInsert()=.
-
-*** Test002
-
-* Documentation of Queue for Ternary Search Trie
-** Structures
-** Function
-** Testing
