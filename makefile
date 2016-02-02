@@ -1,7 +1,8 @@
 OUT=tst
 MAIN=main
 #TEST=testTsTrie
-TEST=maintestTsTrie
+#TEST=maintestTsTrie
+TEST=maintestTSTParseSymtab
 #TEST=testQueueTst
 COPTS=-g -Wall
 OBJDIR=obj
@@ -17,6 +18,9 @@ comp: $(OBJDIR)/tst.o $(OBJDIR)/main.o $(OBJDIR)/node.o
 
 run:
 	./$(OUT)
+
+$(OBJDIR)/testTSTParseSymtab.o: testTSTParseSymtab.c testTSTParseSymtab.h
+	gcc -c $< -o $@ $(COPTS)
 
 $(OBJDIR)/testTsTrie.o: testTsTrie.c testTsTrie.h
 	gcc -c $< -o $@ $(COPTS)
@@ -49,7 +53,7 @@ clean:
 $(OBJDIR)/$(TEST).o: $(TEST).c
 	gcc -c $< -o $@ $(COPTS)
 
-bin/$(TEST): $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o $(OBJDIR)/testTsTrie.o
+bin/$(TEST): $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o $(OBJDIR)/testTsTrie.o $(OBJDIR)/testTSTParseSymtab.o
 	gcc $^ -o $@ $(COPTS)
 
 val: mkdirs bin/$(TEST)
