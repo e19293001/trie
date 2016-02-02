@@ -1,0 +1,228 @@
+#+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00 9:00 10:00 11:00 12:00 13:00 14:00 16:00
+#+COLUMNS: %52ITEM(Task) %15SCHEDULED(Planned End Data) %19CLOSED(Actual End Date) %15Progress(Progress){X} %15Effort(Estimated Effort){:} %7CLOCKSUM(Actual Effort){:}
+
+* Ternary Search Trie
+** Tasks
+   :LOGBOOK:
+   CLOCK: [2016-01-22 Fri 20:36]--[2016-01-22 Fri 20:37] =>  0:01
+   :END:   
+*** DONE study ternary search trie
+    CLOSED: [2016-01-27 Wed 10:53] SCHEDULED: <2016-01-22 Fri>
+    :PROPERTIES:
+    :Effort:   2:00
+    :END:
+*** DONE create a design plan
+    CLOSED: [2016-01-22 Fri 22:40] SCHEDULED: <2016-01-22 Fri>
+   :LOGBOOK:
+   CLOCK: [2016-01-22 Fri 22:28]--[2016-01-22 Fri 22:40] =>  0:12
+   CLOCK: [2016-01-22 Fri 21:41]--[2016-01-22 Fri 22:16] =>  0:35
+   CLOCK: [2016-01-22 Fri 20:37]--[2016-01-22 Fri 21:14] =>  0:37
+   CLOCK: [2016-01-22 Fri 17:13]--[2016-01-22 Fri 17:24] =>  0:11
+   CLOCK: [2016-01-22 Fri 16:35]--[2016-01-22 Fri 17:01] =>  0:26
+   CLOCK: [2016-01-22 Fri 16:01]--[2016-01-22 Fri 16:35] =>  0:34
+   :END:    
+    :PROPERTIES:
+    :Effort:   3:00
+    :END:
+List all the required functions
+*** DONE create a verification plan
+    CLOSED: [2016-01-22 Fri 23:31] SCHEDULED: <2016-01-22 Fri>
+    :LOGBOOK:
+    CLOCK: [2016-01-22 Fri 23:31]--[2016-01-22 Fri 23:32] =>  0:01
+    CLOCK: [2016-01-22 Fri 22:40]--[2016-01-22 Fri 23:31] =>  0:51
+    :END:   
+    :PROPERTIES:
+    :Effort:   3:00
+    :END:
+*** TODO implementation
+    SCHEDULED: <2016-01-23 Sat>
+    :LOGBOOK:
+    CLOCK: [2016-01-31 Sun 19:56]--[2016-01-31 Sun 19:57] =>  0:01
+    CLOCK: [2016-01-31 Sun 19:19]--[2016-01-31 Sun 19:28] =>  0:09
+    CLOCK: [2016-01-29 Fri 16:04]--[2016-01-29 Fri 16:15] =>  0:11
+    CLOCK: [2016-01-27 Wed 10:48]--[2016-01-27 Wed 10:55] =>  0:07
+    CLOCK: [2016-01-22 Fri 23:32]--[2016-01-23 Sat 02:09] =>  2:37
+    :END:   
+**** DONE create an input pattern
+     CLOSED: [2016-01-27 Wed 10:52] SCHEDULED: <2016-01-26 Tue>
+     :LOGBOOK:
+     CLOCK: [2016-01-27 Wed 08:56]--[2016-01-27 Wed 10:48] =>  1:52
+     CLOCK: [2016-01-26 Tue 15:27]--[2016-01-26 Tue 16:16] =>  0:49
+     CLOCK: [2016-01-26 Tue 14:20]--[2016-01-26 Tue 15:27] =>  1:07
+     CLOCK: [2016-01-26 Tue 10:31]--[2016-01-26 Tue 10:42] =>  0:11
+     CLOCK: [2016-01-25 Mon 08:59]--[2016-01-25 Mon 11:46] =>  2:47
+     CLOCK: [2016-01-25 Mon 08:23]--[2016-01-25 Mon 08:45] =>  0:22
+     CLOCK: [2016-01-23 Sat 02:09]--[2016-01-23 Sat 02:56] =>  0:47
+     :END:   
+     :PROPERTIES:
+     :Effort:   4:00
+     :END:
+**** DONE dump tries
+     CLOSED: [2016-01-27 Wed 10:52] SCHEDULED: <2016-01-26 Tue>
+     :LOGBOOK:
+     CLOCK: [2016-01-26 Tue 14:11]--[2016-01-26 Tue 14:20] =>  0:09
+     CLOCK: [2016-01-26 Tue 13:04]--[2016-01-26 Tue 13:17] =>  0:13
+     CLOCK: [2016-01-26 Tue 11:58]--[2016-01-26 Tue 12:47] =>  0:49
+     CLOCK: [2016-01-26 Tue 10:42]--[2016-01-26 Tue 11:46] =>  1:04
+     :END:    
+     :PROPERTIES:
+     :Effort:   2:00
+     :END:
+need to implement breadth first search.
+**** NEXT create breadth first search
+     SCHEDULED: <2016-01-30 Sat>
+     :LOGBOOK:
+     CLOCK: [2016-01-31 Sun 10:29]--[2016-01-31 Sun 10:52] =>  0:23
+     CLOCK: [2016-01-31 Sun 09:12]--[2016-01-31 Sun 09:15] =>  0:03
+     CLOCK: [2016-01-30 Sat 16:45]--[2016-01-30 Sat 17:05] =>  0:20
+     CLOCK: [2016-01-28 Thu 09:37]--[2016-01-28 Thu 09:38] =>  0:01
+     CLOCK: [2016-01-28 Thu 08:18]--[2016-01-28 Thu 08:22] =>  0:04
+     CLOCK: [2016-01-27 Wed 08:55]--[2016-01-27 Wed 08:56] =>  0:01
+     :END:    
+     :PROPERTIES:
+     :Effort:   3:00
+     :END:
+**** DONE create a queue for ternary trie [100%]
+     CLOSED: [2016-01-29 Fri 16:04] SCHEDULED: <2016-01-28 Thu>
+     :LOGBOOK:
+     CLOCK: [2016-01-29 Fri 15:23]--[2016-01-29 Fri 16:04] =>  0:41
+     CLOCK: [2016-01-29 Fri 14:47]--[2016-01-29 Fri 14:48] =>  0:01
+     CLOCK: [2016-01-29 Fri 09:39]--[2016-01-29 Fri 11:04] =>  1:25
+     CLOCK: [2016-01-28 Thu 09:38]--[2016-01-28 Thu 11:46] =>  2:08
+     :END:    
+     - [X] tstqNew
+     - [X] tstqSize
+     - [X] tstqDelete
+     - [X] tstqPopfront
+     - [X] tstqPopback
+     - [X] tstqPushfront
+     - [X] tstqPushback
+     - [X] tstqDump
+**** DONE create trie printer
+     CLOSED: [2016-01-31 Sun 19:19]
+     :LOGBOOK: 
+     CLOCK: [2016-02-01 Mon 20:58]
+     CLOCK: [2016-02-01 Mon 19:24]--[2016-02-01 Mon 19:28] =>  0:04
+     CLOCK: [2016-01-31 Sun 19:17]--[2016-01-31 Sun 19:19] =>  0:02
+     CLOCK: [2016-01-31 Sun 18:15]--[2016-01-31 Sun 18:22] =>  0:07
+     CLOCK: [2016-01-31 Sun 14:57]--[2016-01-31 Sun 17:50] =>  2:53
+     CLOCK: [2016-01-31 Sun 14:04]--[2016-01-31 Sun 14:51] =>  0:47
+     CLOCK: [2016-01-31 Sun 11:19]--[2016-01-31 Sun 13:49] =>  2:30
+     CLOCK: [2016-01-31 Sun 10:52]--[2016-01-31 Sun 11:14] =>  0:22
+     CLOCK: [2016-01-31 Sun 08:56]--[2016-01-31 Sun 09:12] =>  0:16
+     CLOCK: [2016-01-30 Sat 21:49]--[2016-01-30 Sat 21:51] =>  0:02
+     CLOCK: [2016-01-30 Sat 21:20]--[2016-01-30 Sat 21:42] =>  0:22
+     CLOCK: [2016-01-30 Sat 19:12]--[2016-01-30 Sat 19:33] =>  0:21
+     CLOCK: [2016-01-30 Sat 18:10]--[2016-01-30 Sat 18:56] =>  0:46
+     CLOCK: [2016-01-30 Sat 17:05]--[2016-01-30 Sat 17:38] =>  0:33
+     :END:     
+     :PROPERTIES:
+     :Effort:   8:00
+     :END:
+**** DONE create insert function
+     CLOSED: [2016-02-01 Mon 14:23] SCHEDULED: <2016-02-01 Mon>
+     :LOGBOOK:  
+     CLOCK: [2016-02-01 Mon 12:52]--[2016-02-01 Mon 14:23] =>  1:31
+     CLOCK: [2016-02-01 Mon 10:36]--[2016-02-01 Mon 11:46] =>  1:10
+     CLOCK: [2016-02-01 Mon 10:34]--[2016-02-01 Mon 10:35] =>  0:01
+     :END:      
+**** NEXT create a simple parser
+     SCHEDULED: <2016-02-02 Tue>
+     :LOGBOOK:  
+     CLOCK: [2016-02-02 Tue 08:53]
+     :END:      
+*** TODO testing
+
+*** TODO create a documentation for Ternary Search Trie
+* Documentation of Ternary Search Trie
+** Structures
+This section introduces the structures to be used for the Ternary Search Trie
+
+*** tstNode
+
+#+BEGIN_SRC c
+  typedef struct tstNode {
+    char item;
+    int data;
+    tstNode* left;
+    tstNode* middle;
+    tstNode* right;
+  } tstrie;
+#+END_SRC
+
+** Functions
+This section defines the functions that can be used to manipulate the
+ternary search trie.
+
+*** tstNew
+#+BEGIN_SRC c
+  tstrie* tstNew(char i, int d);
+#+END_SRC
+
+Creates and initialize a tstrie. The initial value for data is assign
+to =d=. =i= is assigned to item. =middle=, =left= and =right= are
+initialized to NULL;
+
+This function returns a pointer to the newly created node of a trie.
+
+*** tstSearch
+#+BEGIN_SRC c
+  int tstSearch(tstrie *t, char *s);
+#+END_SRC
+
+Search string =s= in the tstrie pointed by =t=.
+
+This function returns the value of data. A value of -1 will be
+returned when =s= is not found.
+
+*** tstInsert
+#+BEGIN_SRC c
+  int tstInsert(char *s, int d);
+#+END_SRC
+
+Insert =s= into the trie by doing search first until it reaches the
+last character or a null link. If a null link and the last character
+is encountered, a new node will be created and set the data to the
+value of d. If a null link and the last character is not yet is
+encountered, we set the data to that node to the value of d.
+
+This function returns -1 to indicate failure.
+
+*** tstFree
+#+BEGIN_SRC c
+  void tstFree(tstrie root);
+#+END_SRC
+
+Free all the memory allocations for all the nodes of the trie
+including the =root=.
+
+*** tstSize
+** Testing
+*** Test000
+Hard coded tstrie to test =tstInsert()=
+
+Input string:
+{
+   {she,0}, 
+   {sells,1}, 
+   {sea,2}, 
+   {shells,3}, 
+   {by,4}, 
+   {the,5}, 
+   {sea,6}, 
+   {shore,7}, 
+   {ant,8}, 
+   {art,9}, 
+   {zea,10}
+}
+
+*** Test001
+Test =tstInsert()= by inserting keys and values. Verify the inserted
+strings by searching the keys through =tstInsert()=.
+
+*** Test002
+
+* Documentation of Queue for Ternary Search Trie
+** Structures
+** Function
+** Testing
