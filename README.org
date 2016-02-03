@@ -228,8 +228,10 @@ need to implement breadth first search.
 ***** NEXT create a token manager
       SCHEDULED: <2016-02-03 Wed>
       :LOGBOOK:  
-      CLOCK: [2016-02-03 Wed 08:18]
+      CLOCK: [2016-02-03 Wed 19:40]
+      CLOCK: [2016-02-03 Wed 18:59]--[2016-02-03 Wed 19:40] =>  0:41
       :END:      
+CCCLOCK: [2016-02-03 Wed 08:18]--[2016-02-03 Wed 19:39] => 11:21
 ***** TODO create a grammar
       SCHEDULED: <2016-02-03 Wed>
 ***** TODO create a parser
