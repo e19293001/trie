@@ -31,6 +31,9 @@ $(OBJDIR)/TernarySearchTrie.o: TernarySearchTrie.c TernarySearchTrie.h
 $(OBJDIR)/QueueTernarySearchTrie.o: QueueTernarySearchTrie.c QueueTernarySearchTrie.h
 	gcc -c $< -o $@ $(COPTS)
 
+$(OBJDIR)/tokenmanager.o: tokenmanager.c tokenmanager.h
+	gcc -c $< -o $@ $(COPTS)
+
 #$(OBJDIR)/testTsTrie.o: testTsTrie.c 
 #	gcc -c $< -o $@ $(COPTS)
 
@@ -53,7 +56,7 @@ clean:
 $(OBJDIR)/$(TEST).o: $(TEST).c
 	gcc -c $< -o $@ $(COPTS)
 
-bin/$(TEST): $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o $(OBJDIR)/testTsTrie.o $(OBJDIR)/testTSTParseSymtab.o
+bin/$(TEST): $(OBJDIR)/tokenmanager.o $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o $(OBJDIR)/testTsTrie.o $(OBJDIR)/testTSTParseSymtab.o 
 	gcc $^ -o $@ $(COPTS)
 
 val: mkdirs bin/$(TEST)
