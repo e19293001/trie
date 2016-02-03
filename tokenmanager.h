@@ -6,13 +6,20 @@
 #include <ctype.h>
 #include <string.h>
 
+typedef enum {
+  _EOF,
+  ID,
+  UNSIGNED,
+  ERROR
+} tokenConst;
+  
 typedef struct Token {
   int kind;
   int beginLine;
   int beginColumn;
   int endLine;
   int endColumn;
-  char *image;
+  char image[512];
   struct Token *next;
 } Token;
 
@@ -23,7 +30,7 @@ typedef struct TokenManager {
   char currentChar;
   int currentColumnNumber;
   int currentLineNumber;
-  char *inputLine;
+  char inputLine[512];
   Token *tok;
 } TokenManager;
 

@@ -6,39 +6,95 @@ TokenManager* TokenManagerNew(char *inFileName) {
     printf("could not open file: %s\n", inFileName);
     exit(-1);
   }
-  ret->currentChar = '\0';
+  ret->currentChar = '\n';
   ret->currentColumnNumber = 0;
   ret->currentLineNumber = 0;
-  ret->inputLine = NULL;
+  memset(ret->inputLine, '\0', 512);
   ret->tok = NULL;
   return ret;
 }
 
 void getNextChar(TokenManager **t) {
   TokenManager *tm = *t;
-  char *strline;
 
-  strline = malloc(512*sizeof(char));
-  memset(strline,'\0',512);
-
+//  printf("getNextChar\n");
   if (tm->currentChar == EOF) {
     return;
   }
+//  printf("getNextChar\n");
 
 // TODO: add functionality here
-//  if (tm->currentChar == '\n') {
-//    if ((fgets(strline, 512, tm->inFile)) == NULL) {
-//      tm->currentChar = EOF;
-//    }
-//    else {
-//      strline
+  if (tm->currentChar == '\n' ||
+      tm->currentChar == '\r') {
+    if ((fgets(tm->inputLine, 512, tm->inFile)) == NULL) {
+      printf("reached end of file\n");
+      tm->currentChar = EOF;
+      return;
+    }
+    else {
+      int sz;
+      sz = strlen(tm->inputLine);
+      tm->inputLine[sz-1] = '\0';
+      printf("[%s]\n", tm->inputLine);
+      tm->inputLine[sz-1] = '\n';
+      tm->currentColumnNumber = 0;
+      tm->currentLineNumber++;
+    }
+  }
+
+  tm->currentChar = tm->inputLine[tm->currentColumnNumber++];
 }
 
 Token TokenManagerGetNextToken(TokenManager **t) {
   Token ret;
 
   while (isspace((*t)->currentChar)) {
+//    printf("white space\n");
     getNextChar(t);
+  }
+
+  ret.next = NULL;
+  ret.beginLine = (*t)->currentLineNumber;
+  ret.beginColumn = (*t)->currentColumnNumber;
+
+//  printf("(*t)->currentChar: %c\n", (*t)->currentChar);
+  if ((*t)->currentChar == EOF) {
+    memset(&ret.image, 512, '\0');
+    strncpy(ret.image, "<EOF>", 512);
+    ret.endLine = (*t)->currentLineNumber;
+    ret.endColumn = (*t)->currentColumnNumber;
+    ret.kind = _EOF;
+  }
+  else if (isdigit(atoi((*t)->currentChar))) {
+    int indxToImage = 0;
+    memset(&ret.image, 512, '\0');
+    do {
+      printf("[%c]", (*t)->currentChar);
+      ret.image[indxToImage++] = (*t)->currentChar;
+      ret.endLine = (*t)->currentLineNumber;
+      ret.endColumn = (*t)->currentColumnNumber;
+      getNextChar(t);
+    } while (isdigit((*t)->currentChar));
+    
+    ret.kind = UNSIGNED;
+    printf("\nfound digit. %s\n", ret.image);
+  }
+  else if (isalpha((*t)->currentChar)) {
+    int indxToImage = 0;
+    memset(&ret.image, 512, '\0');
+    do {
+      printf("[%c]", (*t)->currentChar);
+      ret.image[indxToImage++] = (*t)->currentChar;
+      ret.endLine = (*t)->currentLineNumber;
+      ret.endColumn = (*t)->currentColumnNumber;
+      getNextChar(t);
+    } while (isalnum((*t)->currentChar));
+    ret.image[indxToImage] = '\0';
+    ret.kind = ID;
+    printf("]nfound digit. %s\n", ret.image);
+  }
+  else {
+    printf("isalpha: %c\n", (*t)->currentChar);
   }
 
   return ret;
