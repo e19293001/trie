@@ -196,7 +196,6 @@ need to implement breadth first search.
 **** DONE create trie printer
      CLOSED: [2016-02-02 Tue 10:33] SCHEDULED: <2016-01-30 Sat>
      :LOGBOOK: 
-     CLOCK: [2016-02-01 Mon 19:24]--[2016-02-02 Tue 10:13] => 14:49
      CLOCK: [2016-01-31 Sun 19:17]--[2016-01-31 Sun 19:19] =>  0:02
      CLOCK: [2016-01-31 Sun 18:15]--[2016-01-31 Sun 18:22] =>  0:07
      CLOCK: [2016-01-31 Sun 14:57]--[2016-01-31 Sun 17:50] =>  2:53
@@ -226,8 +225,11 @@ need to implement breadth first search.
      CLOCK: [2016-02-02 Tue 10:13]--[2016-02-02 Tue 10:55] =>  0:42
      CLOCK: [2016-02-02 Tue 08:53]--[2016-02-02 Tue 10:12] =>  1:19
      :END:      
-***** TODO create a token manager
+***** NEXT create a token manager
       SCHEDULED: <2016-02-03 Wed>
+      :LOGBOOK:  
+      CLOCK: [2016-02-03 Wed 08:18]
+      :END:      
 ***** TODO create a grammar
       SCHEDULED: <2016-02-03 Wed>
 ***** TODO create a parser
