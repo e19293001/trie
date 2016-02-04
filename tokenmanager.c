@@ -1,5 +1,18 @@
 #include "tokenmanager.h"
 
+const char *tokenImage[] = {
+  "_EOF",
+  "PUSH",
+  "PUSHC",
+  "PUSHWC",
+  "HALT",
+  "ID",
+  "UNSIGNED",
+  "OPERATOR",
+  "ERROR"
+};
+
+
 TokenManager* TokenManagerNew(char *inFileName) {
   TokenManager *ret = malloc(sizeof(TokenManager));
   if ((ret->inFile = fopen(inFileName, "r")) == NULL) {
@@ -90,8 +103,23 @@ Token TokenManagerGetNextToken(TokenManager **t) {
       getNextChar(t);
     } while (isalnum((*t)->currentChar));
     ret.image[indxToImage] = '\0';
-    ret.kind = ID;
-    printf("\nfound ID. %s\n", ret.image);
+
+    if ((strncmp(ret.image, "p", 512)) == 0) {
+      ret.kind = PUSH;
+    }
+    else if ((strncmp(ret.image, "pc", 512)) == 0) {
+      ret.kind = PUSHC;
+    }
+    else if ((strncmp(ret.image, "pwc", 512)) == 0) {
+      ret.kind = PUSHWC;
+    }
+    else if ((strncmp(ret.image, "halt", 512)) == 0) {
+      ret.kind = HALT;
+    }
+    else {
+      printf("\nfound ID. %s\n", ret.image);
+      ret.kind = ID;
+    }
   }
   else {
     switch((*t)->currentChar) {
