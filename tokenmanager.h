@@ -10,6 +10,7 @@ typedef enum {
   _EOF,
   ID,
   UNSIGNED,
+  OPERATOR,
   ERROR
 } tokenConst;
   
