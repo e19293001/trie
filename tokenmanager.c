@@ -57,31 +57,31 @@ Token TokenManagerGetNextToken(TokenManager **t) {
   ret.beginLine = (*t)->currentLineNumber;
   ret.beginColumn = (*t)->currentColumnNumber;
 
-//  printf("(*t)->currentChar: %c\n", (*t)->currentChar);
   if ((*t)->currentChar == EOF) {
-    memset(&ret.image, 512, '\0');
+    memset(ret.image, '\0',512);
     strncpy(ret.image, "<EOF>", 512);
     ret.endLine = (*t)->currentLineNumber;
     ret.endColumn = (*t)->currentColumnNumber;
     ret.kind = _EOF;
   }
-  else if (isdigit(atoi((*t)->currentChar))) {
+  else if (isdigit((*t)->currentChar)) {
     int indxToImage = 0;
-    memset(&ret.image, 512, '\0');
+    memset(&ret.image, '\0', 512);
+    printf("after memset -- %s\n", ret.image);
     do {
       printf("[%c]", (*t)->currentChar);
       ret.image[indxToImage++] = (*t)->currentChar;
+      printf(" -- %s", ret.image);
       ret.endLine = (*t)->currentLineNumber;
       ret.endColumn = (*t)->currentColumnNumber;
       getNextChar(t);
     } while (isdigit((*t)->currentChar));
-    
     ret.kind = UNSIGNED;
     printf("\nfound digit. %s\n", ret.image);
   }
   else if (isalpha((*t)->currentChar)) {
     int indxToImage = 0;
-    memset(&ret.image, 512, '\0');
+    memset(ret.image, '\0', 512);
     do {
       printf("[%c]", (*t)->currentChar);
       ret.image[indxToImage++] = (*t)->currentChar;
@@ -91,10 +91,44 @@ Token TokenManagerGetNextToken(TokenManager **t) {
     } while (isalnum((*t)->currentChar));
     ret.image[indxToImage] = '\0';
     ret.kind = ID;
-    printf("]nfound digit. %s\n", ret.image);
+    printf("\nfound ID. %s\n", ret.image);
   }
   else {
-    printf("isalpha: %c\n", (*t)->currentChar);
+    switch((*t)->currentChar) {
+    case '+': {
+      getNextChar(t);
+      memset(ret.image, '\0', 512);
+      ret.image[0] = '+';
+      ret.kind = OPERATOR;
+      break;
+    }
+    case '-': {
+      getNextChar(t);
+      memset(ret.image, '\0', 512);
+      ret.image[0] = '-';
+      ret.kind = OPERATOR;
+      break;
+    }
+    case '=': {
+      getNextChar(t);
+      memset(ret.image, '\0', 512);
+      ret.image[0] = '=';
+      ret.kind = OPERATOR;
+      break;
+    }
+    case ';': {
+      getNextChar(t);
+      memset(ret.image, '\0', 512);
+      ret.image[0] = ';';
+      ret.kind = OPERATOR;
+      break;
+    }
+    default: {
+      printf("error token found: %c\n", (*t)->currentChar);
+      getNextChar(t);
+      ret.kind = ERROR;
+    }
+    }
   }
 
   return ret;
