@@ -235,10 +235,10 @@ need to implement breadth first search.
       CLOCK: [2016-02-03 Wed 19:40]--[2016-02-03 Wed 20:20] =>  0:40
       CLOCK: [2016-02-03 Wed 18:59]--[2016-02-03 Wed 19:40] =>  0:41
       :END:      
-***** NEXT create a grammar
-      SCHEDULED: <2016-02-03 Wed>
+***** DONE create a grammar
+      CLOSED: [2016-02-04 Thu 11:45] SCHEDULED: <2016-02-03 Wed>
       :LOGBOOK:  
-      CLOCK: [2016-02-04 Thu 11:25]
+      CLOCK: [2016-02-04 Thu 11:25]--[2016-02-04 Thu 11:45] =>  0:20
       :END:      
 
 The grammar is quite simple:
