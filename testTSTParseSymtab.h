@@ -5,6 +5,6 @@
 #include "testTsTrie.h"
 #include "tokenmanager.h"
 
-void Test0000Parser();
-
+void Test0000Parser(); // test token manager
+void Test0001Parser(); // test parser
 #endif
