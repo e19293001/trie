@@ -219,21 +219,37 @@ need to implement breadth first search.
      CLOCK: [2016-02-01 Mon 10:36]--[2016-02-01 Mon 11:46] =>  1:10
      CLOCK: [2016-02-01 Mon 10:34]--[2016-02-01 Mon 10:35] =>  0:01
      :END:      
-**** NEXT create a simple compiler for testing
+**** TODO create a simple compiler for testing
      SCHEDULED: <2016-02-05 Fri>
      :LOGBOOK:  
      CLOCK: [2016-02-02 Tue 10:13]--[2016-02-02 Tue 10:55] =>  0:42
      CLOCK: [2016-02-02 Tue 08:53]--[2016-02-02 Tue 10:12] =>  1:19
      :END:      
-***** NEXT create a token manager
-      SCHEDULED: <2016-02-03 Wed>
+***** DONE create a token manager
+      CLOSED: [2016-02-04 Thu 11:25] SCHEDULED: <2016-02-03 Wed>
       :LOGBOOK:  
-      CLOCK: [2016-02-03 Wed 19:40]
+      CLOCK: [2016-02-04 Thu 09:54]--[2016-02-04 Thu 11:25] =>  1:31
+      CLOCK: [2016-02-03 Wed 10:42]--[2016-02-03 Wed 11:06] =>  0:24
+      CLOCK: [2016-02-03 Wed 08:59]--[2016-02-03 Wed 10:08] =>  1:09
+      CLOCK: [2016-02-03 Wed 08:18]--[2016-02-03 Wed 08:47] =>  0:29
+      CLOCK: [2016-02-03 Wed 19:40]--[2016-02-03 Wed 20:20] =>  0:40
       CLOCK: [2016-02-03 Wed 18:59]--[2016-02-03 Wed 19:40] =>  0:41
       :END:      
-CCCLOCK: [2016-02-03 Wed 08:18]--[2016-02-03 Wed 19:39] => 11:21
-***** TODO create a grammar
+***** NEXT create a grammar
       SCHEDULED: <2016-02-03 Wed>
+      :LOGBOOK:  
+      CLOCK: [2016-02-04 Thu 11:25]
+      :END:      
+
+The grammar is quite simple:
+
+#+begin_src 
+   start -> push | pushc | pushwc | halt | λ
+   push -> <p> <unsigned>
+   pushc -> <pc> <unsigned>
+   pushwc -> <pushwc> <unsigned>
+   halt -> <halt>
+#+end_src
 ***** TODO create a parser
       SCHEDULED: <2016-02-04 Thu>
 *** TODO testing
