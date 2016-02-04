@@ -174,7 +174,7 @@ need to implement breadth first search.
      :PROPERTIES:
      :Effort:   3:00
      :END:
-**** DONE create a queue for ternary trie [100%]
+**** DONE create a queue for ternary trie [87%]
      CLOSED: [2016-01-29 Fri 16:04] SCHEDULED: <2016-01-28 Thu>
      :LOGBOOK:
      CLOCK: [2016-01-29 Fri 15:23]--[2016-01-29 Fri 16:04] =>  0:41
@@ -250,8 +250,11 @@ The grammar is quite simple:
    pushwc -> <pushwc> <unsigned>
    halt -> <halt>
 #+end_src
-***** TODO create a parser
+***** NEXT create a parser
       SCHEDULED: <2016-02-04 Thu>
+      :LOGBOOK:  
+      CLOCK: [2016-02-04 Thu 20:04]--[2016-02-04 Thu 21:22] =>  1:18
+      :END:      
 *** TODO testing
 
 *** TODO create a documentation for Ternary Search Trie
