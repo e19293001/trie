@@ -1,4 +1,13 @@
 #include "testTSTParseSymtab.h"
+#include "parser.h"
+
+void Test0001Parser() { // test parser
+  parserData *parser;
+  parser = ParserNew();
+  printf("testing parser\n");
+  ParserStart(parser);
+  ParserDelete(parser);
+}
 
 void Test0000Parser() {
   TokenManager* tm;
