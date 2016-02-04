@@ -19,6 +19,9 @@ comp: $(OBJDIR)/tst.o $(OBJDIR)/main.o $(OBJDIR)/node.o
 run:
 	./$(OUT)
 
+$(OBJDIR)/parser.o: parser.c parser.h
+	gcc -c $< -o $@ $(COPTS)
+
 $(OBJDIR)/testTSTParseSymtab.o: testTSTParseSymtab.c testTSTParseSymtab.h
 	gcc -c $< -o $@ $(COPTS)
 
@@ -56,7 +59,7 @@ clean:
 $(OBJDIR)/$(TEST).o: $(TEST).c
 	gcc -c $< -o $@ $(COPTS)
 
-bin/$(TEST): $(OBJDIR)/tokenmanager.o $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o $(OBJDIR)/testTsTrie.o $(OBJDIR)/testTSTParseSymtab.o 
+bin/$(TEST): $(OBJDIR)/tokenmanager.o $(OBJDIR)/$(TEST).o $(OBJDIR)/TernarySearchTrie.o $(OBJDIR)/QueueTernarySearchTrie.o $(OBJDIR)/testTsTrie.o $(OBJDIR)/testTSTParseSymtab.o $(OBJDIR)/parser.o
 	gcc $^ -o $@ $(COPTS)
 
 val: mkdirs bin/$(TEST)
