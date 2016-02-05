@@ -18,6 +18,7 @@ void ParserAdvance();
 void ParserDelete(parserData *t);
 void ParserStart(parserData *t);
 
+void program();
 void push();
 void pushc();
 void pushwc();
