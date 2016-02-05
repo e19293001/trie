@@ -1,5 +1,5 @@
 #+PROPERTY: Effort_ALL 0 0:10 0:30 1:00 2:00 3:00 4:00 5:00 6:00 7:00 8:00 9:00 10:00 11:00 12:00 13:00 14:00 16:00
-#+COLUMNS: %52ITEM(Task) %15SCHEDULED(Planned End Data) %22CLOSED(Actual End Date) %15Progress{X} %15Effort(Estimated Effort){:} %7CLOCKSUM(Actual Effort){:}
+#+COLUMNS: %52ITEM(Task) %15SCHEDULED(Planned End Data) %22CLOSED(Actual End Date) %15Effort(Estimated Effort){:} %7CLOCKSUM(Actual Effort){:}
 
 * Ternary Search Trie
 ** Documentation of Ternary Search Trie
@@ -174,7 +174,7 @@ need to implement breadth first search.
      :PROPERTIES:
      :Effort:   3:00
      :END:
-**** DONE create a queue for ternary trie [87%]
+**** DONE create a queue for ternary trie [8/8]
      CLOSED: [2016-01-29 Fri 16:04] SCHEDULED: <2016-01-28 Thu>
      :LOGBOOK:
      CLOCK: [2016-01-29 Fri 15:23]--[2016-01-29 Fri 16:04] =>  0:41
@@ -219,6 +219,9 @@ need to implement breadth first search.
      CLOCK: [2016-02-01 Mon 10:36]--[2016-02-01 Mon 11:46] =>  1:10
      CLOCK: [2016-02-01 Mon 10:34]--[2016-02-01 Mon 10:35] =>  0:01
      :END:      
+     :PROPERTIES:
+     :Effort:   2:00
+     :END:
 **** TODO create a simple compiler for testing
      SCHEDULED: <2016-02-05 Fri>
      :LOGBOOK:  
@@ -235,26 +238,41 @@ need to implement breadth first search.
       CLOCK: [2016-02-03 Wed 19:40]--[2016-02-03 Wed 20:20] =>  0:40
       CLOCK: [2016-02-03 Wed 18:59]--[2016-02-03 Wed 19:40] =>  0:41
       :END:      
+      :PROPERTIES:
+      :Effort:   3:00
+      :END:
 ***** DONE create a grammar
       CLOSED: [2016-02-04 Thu 11:45] SCHEDULED: <2016-02-03 Wed>
       :LOGBOOK:  
       CLOCK: [2016-02-04 Thu 11:25]--[2016-02-04 Thu 11:45] =>  0:20
       :END:      
+      :PROPERTIES:
+      :Effort:   1:00
+      :END:
 
 The grammar is quite simple:
 
 #+begin_src 
-   start -> push | pushc | pushwc | halt | λ
+   start -> program
+   program -> push | pushc | pushwc | halt | program | λ
    push -> <p> <unsigned>
    pushc -> <pc> <unsigned>
    pushwc -> <pushwc> <unsigned>
    halt -> <halt>
 #+end_src
-***** NEXT create a parser
-      SCHEDULED: <2016-02-04 Thu>
+***** DONE create a parser
+      CLOSED: [2016-02-05 Fri 09:44] SCHEDULED: <2016-02-04 Thu>
       :LOGBOOK:  
+      CLOCK: [2016-02-05 Fri 09:14]--[2016-02-05 Fri 09:44] =>  0:30
       CLOCK: [2016-02-04 Thu 20:04]--[2016-02-04 Thu 21:22] =>  1:18
       :END:      
+      :PROPERTIES:
+      :Effort:   2:00
+      :END:
+***** TODO integrate a symbol table
+      :PROPERTIES:
+      :Effort:   2:00
+      :END:
 *** TODO testing
 
 *** TODO create a documentation for Ternary Search Trie
