@@ -80,11 +80,11 @@ Token TokenManagerGetNextToken(TokenManager **t) {
   else if (isdigit((*t)->currentChar)) {
     int indxToImage = 0;
     memset(&ret.image, '\0', 512);
-    printf("after memset -- %s\n", ret.image);
+//    printf("after memset -- %s\n", ret.image);
     do {
-      printf("[%c]", (*t)->currentChar);
+//      printf("[%c]", (*t)->currentChar);
       ret.image[indxToImage++] = (*t)->currentChar;
-      printf(" -- %s", ret.image);
+//      printf(" -- %s", ret.image);
       ret.endLine = (*t)->currentLineNumber;
       ret.endColumn = (*t)->currentColumnNumber;
       getNextChar(t);
@@ -96,7 +96,7 @@ Token TokenManagerGetNextToken(TokenManager **t) {
     int indxToImage = 0;
     memset(ret.image, '\0', 512);
     do {
-      printf("[%c]", (*t)->currentChar);
+//      printf("[%c]", (*t)->currentChar);
       ret.image[indxToImage++] = (*t)->currentChar;
       ret.endLine = (*t)->currentLineNumber;
       ret.endColumn = (*t)->currentColumnNumber;
