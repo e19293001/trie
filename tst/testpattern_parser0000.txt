@@ -1,4 +1,7 @@
 p 10
 pwc 10
 pc 10
-halt
+p 34
+p     34
+pwc  34
+halt 
