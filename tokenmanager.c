@@ -9,6 +9,9 @@ const char *tokenImage[] = {
   "ID",
   "UNSIGNED",
   "OPERATOR",
+  "DWORD",
+  "SEMICOL",
+  "COLON",
   "ERROR"
 };
 
@@ -90,7 +93,7 @@ Token TokenManagerGetNextToken(TokenManager **t) {
       getNextChar(t);
     } while (isdigit((*t)->currentChar));
     ret.kind = UNSIGNED;
-    printf("\nfound digit. %s\n", ret.image);
+//    printf("found digit. %s\n", ret.image);
   }
   else if (isalpha((*t)->currentChar)) {
     int indxToImage = 0;
@@ -116,8 +119,11 @@ Token TokenManagerGetNextToken(TokenManager **t) {
     else if ((strncmp(ret.image, "halt", 512)) == 0) {
       ret.kind = HALT;
     }
+    else if ((strncmp(ret.image, "dw", 512)) == 0) {
+      ret.kind = DWORD;
+    }
     else {
-      printf("\nfound ID. %s\n", ret.image);
+      //printf("\nfound ID. %s\n", ret.image);
       ret.kind = ID;
     }
   }
@@ -137,17 +143,24 @@ Token TokenManagerGetNextToken(TokenManager **t) {
       ret.kind = OPERATOR;
       break;
     }
-    case '=': {
-      getNextChar(t);
-      memset(ret.image, '\0', 512);
-      ret.image[0] = '=';
-      ret.kind = OPERATOR;
-      break;
-    }
     case ';': {
       getNextChar(t);
       memset(ret.image, '\0', 512);
       ret.image[0] = ';';
+      ret.kind = SEMICOL;
+      break;
+    }
+    case ':': {
+      getNextChar(t);
+      memset(ret.image, '\0', 512);
+      ret.image[0] = ':';
+      ret.kind = COLON;
+      break;
+    }
+    case '=': {
+      getNextChar(t);
+      memset(ret.image, '\0', 512);
+      ret.image[0] = '=';
       ret.kind = OPERATOR;
       break;
     }

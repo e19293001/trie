@@ -254,11 +254,13 @@ The grammar is quite simple:
 
 #+begin_src 
    start -> program
-   program -> push | pushc | pushwc | halt | program | λ
-   push -> <p> <unsigned>
+   program -> push | pushc | pushwc | halt | dw | program | λ
+   push -> <p> expression
    pushc -> <pc> <unsigned>
    pushwc -> <pushwc> <unsigned>
    halt -> <halt>
+   expression -> <unsigned> | <id>
+   dw -> <dw> <semicolon> <id> <unsigned>
 #+end_src
 ***** DONE create a parser
       CLOSED: [2016-02-05 Fri 09:44] SCHEDULED: <2016-02-04 Thu>
@@ -269,7 +271,13 @@ The grammar is quite simple:
       :PROPERTIES:
       :Effort:   2:00
       :END:
-***** TODO integrate a symbol table
+***** NEXT integrate a symbol table
+      :LOGBOOK:  
+      CLOCK: [2016-02-06 Sat 17:20]--[2016-02-06 Sat 18:10] =>  0:50
+      CLOCK: [2016-02-06 Sat 17:09]--[2016-02-06 Sat 17:11] =>  0:02
+      CLOCK: [2016-02-06 Sat 16:49]--[2016-02-06 Sat 17:09] =>  0:20
+      CLOCK: [2016-02-06 Sat 12:47]--[2016-02-06 Sat 12:49] =>  0:02
+      :END:      
       :PROPERTIES:
       :Effort:   2:00
       :END:

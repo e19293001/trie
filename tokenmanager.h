@@ -16,6 +16,9 @@ typedef enum {
   ID,
   UNSIGNED,
   OPERATOR,
+  DWORD,
+  SEMICOL,
+  COLON,
   ERROR
 } tokenConst; // update this with tokenImage in tokenmanager.c
  

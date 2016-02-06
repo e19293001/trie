@@ -1,9 +1,17 @@
 #include "testTSTParseSymtab.h"
 #include "parser.h"
 
+void Test0002Parser() { // test symbol table
+  parserData *parser;
+  parser = ParserNew("tst/testpattern_symtab0000.txt");
+  printf("testing parser\n");
+  ParserStart(parser);
+  ParserDelete(parser);
+}
+
 void Test0001Parser() { // test parser
   parserData *parser;
-  parser = ParserNew();
+  parser = ParserNew("tst/testpattern_parser0000.txt");
   printf("testing parser\n");
   ParserStart(parser);
   ParserDelete(parser);

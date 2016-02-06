@@ -7,4 +7,5 @@
 
 void Test0000Parser(); // test token manager
 void Test0001Parser(); // test parser
+void Test0002Parser(); // test symbol table
 #endif

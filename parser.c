@@ -1,11 +1,12 @@
 #include "parser.h"
 
-parserData* ParserNew() {
+parserData* ParserNew(char *s) {
   parserData *ret;
 
   ret = malloc(sizeof(parserData));
+  ret->st = NULL;
 
-  ret->tm = TokenManagerNew("tst/testpattern_parser0000.txt");
+  ret->tm = TokenManagerNew(s);
   ret->currentToken.next = NULL;
   ret->previousToken.next = NULL;
 
@@ -14,7 +15,8 @@ parserData* ParserNew() {
 
 void ParserStart(parserData *t) {
   _parser = t;
-  program(t);
+  _parser->currentToken = TokenManagerGetNextToken(&_parser->tm);
+  program();
   if (_parser->currentToken.kind != _EOF) {
     printf("expecting EOF. token is: %s\n", tokenImage[_parser->currentToken.kind]);
     exit(-1);
@@ -22,59 +24,91 @@ void ParserStart(parserData *t) {
 }
 
 void program() {
-  _parser->currentToken = TokenManagerGetNextToken(&_parser->tm);
   if (_parser->currentToken.kind == PUSH) {
-    printf("call push\n");
     push();
     program();
   }
   else if (_parser->currentToken.kind == PUSHC) {
-    printf("call pushc\n");
     pushc();
     program();
   }
   else if (_parser->currentToken.kind == PUSHWC) {
-    printf("call pushwc\n");
+//    printf("call pushwc\n");
     pushwc();
     program();
   }
   else if (_parser->currentToken.kind == HALT) {
-    printf("call halt\n");
+//    printf("call halt\n");
     halt();
+    program();
+  }
+  else if (_parser->currentToken.kind == DWORD) {
+//    printf("call dword\n");
+    dword();
     program();
   }
   else if (_parser->currentToken.kind == _EOF) {
     // do nothing
   }
   else {
-    printf("error unknown token\n");
+    printf("error unknown token %s\n", tokenImage[_parser->currentToken.kind]);
+    return;
   }
 }
 
 void push() {
-  if (_parser->currentToken.kind == PUSH) {
+//  if (_parser->currentToken.kind == PUSH) {
     consume(PUSH);
-    consume(UNSIGNED);
-  }
+    //consume(UNSIGNED);
+    expression();
+//  }
 }
 
 void pushc() {
-  if (_parser->currentToken.kind == PUSHC) {
+//  if (_parser->currentToken.kind == PUSHC) {
     consume(PUSHC);
     consume(UNSIGNED);
-  }
+    //expression();
+//  }
 }
 
 void pushwc() {
-  if (_parser->currentToken.kind == PUSHWC) {
+//  if (_parser->currentToken.kind == PUSHWC) {
     consume(PUSHWC);
     consume(UNSIGNED);
-  }
+    //expression();
+//  }
 }
 
 void halt() {
   if (_parser->currentToken.kind == HALT) {
     consume(HALT);
+  }
+}
+
+void dword() {
+  if (_parser->currentToken.kind == DWORD) {
+    consume(DWORD);
+    consume(COLON);
+    consume(ID);
+    consume(UNSIGNED);
+  }
+}
+
+void expression() {
+//  printf("expression currentToken: %s\n", tokenImage[_parser->currentToken.kind]);
+  if (_parser->currentToken.kind == UNSIGNED) {
+    consume(UNSIGNED);
+  }
+  else if (_parser->currentToken.kind == ID) {
+    Token tkn = _parser->currentToken;
+    consume(ID);
+    _parser->st = tstInsert(_parser->st, tkn.image, 0);
+    tstDump(_parser->st);
+  }
+  else {
+    printf("error: Unknown token found: %s\n", tokenImage[_parser->currentToken.kind]);
+    return;
   }
 }
 
@@ -96,17 +130,31 @@ void ParserAdvance() {
 }
 
 void consume(int expected) {
-  if (_parser->currentToken.kind != expected) {
+  if (_parser->currentToken.kind == expected) {
     ParserAdvance();
+//    printf("consume: %s\n", tokenImage[expected]);
   }
   else {
     printf("consume: %s\n", tokenImage[expected]);
     printf("Found token \"%s\", ", _parser->currentToken.image);
     printf("expecting kind of \"%s\"\n", tokenImage[expected]);
+    exit(-1);
   }
 }
 
 void ParserDelete(parserData *t) {
   TokenManagerDelete(t->tm);
+  tstDelete(t->st);
   free(t);
 }
+
+
+int ParserImageExists(Token t) {
+  if (tstSearch(_parser->st, _parser->currentToken.image) == NULL) {
+    return 0;
+  }
+  else {
+    return 1;
+  }
+}
+
