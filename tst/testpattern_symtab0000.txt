@@ -1,0 +1,9 @@
+p x
+pc 9
+pwc 10
+p y
+p     34
+pwc  34
+halt
+dw: x 0
+dw: y 0
